@@ -130,6 +130,6 @@ mongoose.connect(process.env.MONGO_URL, (err) => {
     if (err) { console.error(err); return false; }
 
     app.listen(PORT, function() {
-        console.log("Server started on port " + port);
+        console.log("Server started on port " + PORT);
     });
 });
