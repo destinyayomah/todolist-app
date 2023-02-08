@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const _ = require('lodash');
 require('dotenv').config();
 const date = require(__dirname + "/date.js");
+const PORT = process.env.PORT || 3000;
 
 mongoose.set("strictQuery", false);
-mongoose.connect(process.env.MONGO_URL);
 
 const itemsSchema = new mongoose.Schema({
     name: String
@@ -126,8 +126,10 @@ app.post('/delete', (req, res) => {
     }
 });
 
-const port = process.env.PORT ? process.env.PORT : 3000;
+mongoose.connect(process.env.MONGO_URL, (err) => {
+    if (err) { console.error(err); return false; }
 
-app.listen(port, function() {
-    console.log("Server started on port " + port);
+    app.listen(PORT, function() {
+        console.log("Server started on port " + port);
+    });
 });
